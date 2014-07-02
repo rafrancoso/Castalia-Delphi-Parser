@@ -1290,10 +1290,10 @@ procedure TmwSimplePasPar.UsedUnitName;
 begin
   {$IFDEF D8_NEWER} //JThurman 2004-03-03
   Expected(ptIdentifier);
-  while TokenID = ptPoint do
+  if TokenID = ptPoint then
   begin
     NextToken;
-    Expected(ptIdentifier);
+    UsedUnitName;
   end;
   {$ELSE}
   Expected(ptIdentifier);
