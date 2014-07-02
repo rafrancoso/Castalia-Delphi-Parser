@@ -236,6 +236,7 @@ type
     procedure HandlePtIfEndDirect(Sender: TmwBasePasLex); virtual;
     procedure HandlePtElseIfDirect(Sender: TmwBasePasLex); virtual;
     procedure NextToken; virtual;
+    function PreviewNextToken: TmwPasLex;virtual;
     procedure SkipJunk; virtual;
     procedure TerminateStream; virtual;
     procedure SEMICOLON; virtual;
@@ -959,6 +960,16 @@ begin
   Sender.Next; //XM Jul-2000
 
   { ToDo }
+end;
+
+function TmwSimplePasPar.PreviewNextToken:TmwPasLex;
+var PreviewLexer : TmwPasLex;
+begin
+  PreviewLexer := TmwPasLex.Create;
+  PreviewLexer.InitFrom(fLexer);
+  PreviewLexer.NextNoJunk;
+  PreviewLexer.Token;
+  result := PreviewLexer;
 end;
 
 procedure TmwSimplePasPar.NextToken;
